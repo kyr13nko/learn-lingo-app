@@ -8,6 +8,6 @@ export const LogoWrapper = styled.div`
 
 export const LogoText = styled.p`
   font-size: 1.25rem;
-  line-height: 120%;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 `;

@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-bg: #F8F8F8;
     
     --color-black: #121417;
+    --color-black-70: #12141770;
     --color-black-20: #12141720;
 
     --color-grey: #8A8A89;
@@ -59,6 +60,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   button {
+    background-color: transparent;
     cursor: pointer;
   }
 `;
@@ -81,6 +83,6 @@ export const Container = styled.div`
 
   @media screen and (min-width: 1440px) {
     max-width: 1440px;
-    padding: 0 4rem;
+    padding: 0 8rem;
   }
 `;

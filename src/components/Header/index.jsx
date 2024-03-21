@@ -1,13 +1,17 @@
 import Logo from "./Logo/Logo";
 import Navigation from "./Navigation/Navigation";
+import UserMenu from "./UserMenu/UserMenu";
 
-import { StyledHeader } from "./index.styled";
+import { HeaderContainer, StyledHeader } from "./index.styled";
 
 const Header = () => {
   return (
     <StyledHeader>
-      <Logo />
-      <Navigation />
+      <HeaderContainer>
+        <Logo />
+        <Navigation />
+        <UserMenu />
+      </HeaderContainer>
     </StyledHeader>
   );
 };

@@ -1,62 +1,68 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { setUser } from "../../../store/slices/userSlice";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
+import { setUser } from "../../../store/user/userSlice";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        updateProfile(auth.currentUser, {
-          displayName: name,
-        });
+  const handleSubmit = async (values, { resetForm }) => {
+    const { name, email, password } = values;
 
-        dispatch(
-          setUser({
-            user: { name: user.displayName, email: user.email },
-            token: user.accessToken,
-            id: user.uid,
-          })
-        );
-      })
-      .catch(console.error);
+    try {
+      const auth = getAuth();
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+
+      dispatch(
+        setUser({
+          user: { name: user.displayName, email: user.email },
+          token: user.accessToken,
+          id: user.uid,
+        })
+      );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form>
-      <input
-        type="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit" onClick={handleClick}>
-        Sign Up
-      </button>
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+        <Field type="text" name="name" placeholder="Name" />
+        <ErrorMessage name="name" component="div" />
+        <Field type="email" name="email" placeholder="Email" />
+        <ErrorMessage name="email" component="div" />
+        <Field type="password" name="password" placeholder="Password" />
+        <ErrorMessage name="password" component="div" />
+        <button type="submit">Sign Up</button>
+      </Form>
+    </Formik>
   );
 };
 

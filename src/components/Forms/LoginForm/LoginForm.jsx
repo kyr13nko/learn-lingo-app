@@ -1,52 +1,62 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { setUser } from "../../../store/slices/userSlice";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import { setUser } from "../../../store/user/userSlice";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const initialValues = {
+    email: "",
+    password: "",
+  };
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
 
-    const auth = getAuth();
+  const handleSubmit = async (values, { resetForm }) => {
+    const { email, password } = values;
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            user: { name: user.displayName, email: user.email },
-            token: user.accessToken,
-            id: user.uid,
-          })
-        );
-      })
-      .catch(console.error);
+    try {
+      const auth = getAuth();
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+
+      console.log("user", user);
+      dispatch(
+        setUser({
+          user: { name: user.displayName, email: user.email },
+          token: user.accessToken,
+          id: user.uid,
+        })
+      );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit" onClick={handleClick}>
-        Log In
-      </button>
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+        <Field type="email" name="email" placeholder="Email" />
+        <ErrorMessage name="email" component="div" />
+        <Field type="password" name="password" placeholder="Password" />
+        <ErrorMessage name="password" component="div" />
+        <button type="submit"> Log In </button>
+      </Form>
+    </Formik>
   );
 };
 

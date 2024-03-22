@@ -30,7 +30,7 @@ export const List = styled.ul`
   align-items: center;
   gap: 6.25rem;
 
-  border: 1.5px dashed var(--color-primary);
+  border: 2px dashed var(--color-primary);
   border-radius: 1.875rem;
 
   padding: 2.5rem 7.625rem;
@@ -46,6 +46,17 @@ export const Span = styled.span`
   font-size: 1.75rem;
   line-height: 1.14;
   letter-spacing: -0.02em;
+
+  position: relative;
+
+  margin: 0 1rem 0 0;
+
+  &::after {
+    content: "+";
+    position: absolute;
+    right: -1.25rem;
+    background-color: transparent;
+  }
 `;
 
 export const Text = styled.p`

@@ -1,15 +1,17 @@
-import { BtnLogIn, BtnRegistration, BtnWrapper, Img } from "./UserMenu.styled";
+import { BtnLog, Img, BtnWrapper } from "../index.styled";
 
 import logInIcon from "../../../assets/images/log-in.svg";
 
+import useAuth from "../../../hooks/useAuth";
+
 const UserMenu = () => {
+  const { name } = useAuth();
   return (
     <BtnWrapper>
-      <BtnLogIn type="button">
-        <Img src={logInIcon} alt="log in icon" />
-        Log in
-      </BtnLogIn>
-      <BtnRegistration type="button">Registration</BtnRegistration>
+      <p>Welcome, {name}</p>
+      <BtnLog type="button">
+        <Img src={logInIcon} alt="log out button" /> Log Out
+      </BtnLog>
     </BtnWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
 
-import { removeUser } from "../../../store/user/userSlice";
+import { removeUser } from "../../../store/auth/authSlice";
 
 import { BtnLog, Img, BtnWrapper } from "../index.styled";
 

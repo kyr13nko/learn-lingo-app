@@ -4,7 +4,6 @@ import AuthNav from "../AuthNav/AuthNav";
 
 const AppBar = () => {
   const { isAuth } = useAuth();
-  console.log("isAuth", isAuth);
 
   return isAuth ? <UserMenu /> : <AuthNav />;
 };

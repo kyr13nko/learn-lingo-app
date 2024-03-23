@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { setUser } from "../../../store/user/userSlice";
+import { setUser } from "../../../store/auth/authSlice";
+
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const RegistrationForm = () => {

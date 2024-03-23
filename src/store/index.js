@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "./user/userSlice";
 
 import {
   persistStore,
@@ -13,14 +12,20 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const userPersistConfig = {
+import { authReducer } from "./auth/authSlice";
+import { teachersReducer } from "./teachers/teachersSlice";
+
+const authPersistConfig = {
   key: "user",
   storage,
   whitelist: ["token"],
 };
 
 export const store = configureStore({
-  reducer: { user: persistReducer(userPersistConfig, userReducer) },
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    teachers: teachersReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

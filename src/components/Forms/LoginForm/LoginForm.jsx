@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { setUser } from "../../../store/user/userSlice";
+import { setUser } from "../../../store/auth/authSlice";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -29,7 +29,6 @@ const LoginForm = () => {
       const auth = getAuth();
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-      console.log("user", user);
       dispatch(
         setUser({
           user: { name: user.displayName, email: user.email },

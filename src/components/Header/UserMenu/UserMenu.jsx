@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { getAuth, signOut } from "firebase/auth";
+// import { getAuth, signOut } from "firebase/auth";
 
-import { removeUser } from "../../../store/auth/authSlice";
+// import { removeUser } from "../../../store/auth/authSlice";
 
 import { BtnLog, Img, BtnWrapper } from "../index.styled";
 
@@ -15,14 +15,13 @@ const UserMenu = () => {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    try {
-      const auth = getAuth();
-      await signOut(auth);
-
-      dispatch(removeUser());
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const auth = getAuth();
+    //   await signOut(auth);
+    //   dispatch(removeUser());
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (

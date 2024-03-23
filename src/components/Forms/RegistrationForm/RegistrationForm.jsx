@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
 
+import { registrationUser } from "../../../store/auth/authOperations";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import { setUser } from "../../../store/auth/authSlice";
-
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -26,22 +24,8 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     const { name, email, password } = values;
-
     try {
-      const auth = getAuth();
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
-
-      await updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-
-      dispatch(
-        setUser({
-          user: { name: user.displayName, email: user.email },
-          token: user.accessToken,
-          id: user.uid,
-        })
-      );
+      dispatch(registrationUser({ name, email, password }));
       resetForm();
     } catch (error) {
       console.error(error);

@@ -3,8 +3,9 @@ import { BtnLog, BtnRegistration, BtnWrapper, Img } from "../index.styled";
 import logInIcon from "../../../assets/images/log-in.svg";
 import { useState } from "react";
 import Modal from "../../Modal/Modal";
-import RegistrationForm from "../../Forms/RegistrationForm/RegistrationForm";
+
 import LoginForm from "../../Forms/LoginForm/LoginForm";
+import RegistrationForm from "../../Forms/RegistrationForm/RegistrationForm";
 
 const AuthNav = () => {
   const [showLogInModal, setShowLogInModal] = useState(false);

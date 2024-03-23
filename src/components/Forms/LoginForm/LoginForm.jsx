@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
 
+import { loginUser } from "../../../store/auth/authOperations";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import { setUser } from "../../../store/auth/authSlice";
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -22,20 +20,10 @@ const LoginForm = () => {
       .required("Password is required"),
   });
 
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = (values, { resetForm }) => {
     const { email, password } = values;
-
     try {
-      const auth = getAuth();
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-
-      dispatch(
-        setUser({
-          user: { name: user.displayName, email: user.email },
-          token: user.accessToken,
-          id: user.uid,
-        })
-      );
+      dispatch(loginUser({ email, password }));
       resetForm();
     } catch (error) {
       console.error(error);

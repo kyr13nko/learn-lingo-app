@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import CloseIconSvg from "../../assets/images/close-icon.svg";
-
+import sprite from "../../assets/images/sprite.svg";
 import { CloseIcon, ModalStyled, Overlay, Text, Title } from "./Modal.styled";
 
 const modalRoot = document.getElementById("modal-root");
@@ -30,7 +29,10 @@ const Modal = ({ title, text, onClose, children }) => {
     <Overlay onClick={handleBackdropClick}>
       <ModalStyled>
         <CloseIcon onClick={onClose}>
-          <img src={CloseIconSvg} />
+          {/* <img src={CloseIconSvg} /> */}
+          <svg>
+            <use href={`${sprite}#close-icon`}></use>
+          </svg>
         </CloseIcon>
         <Title>{title}</Title>
         <Text>{text}</Text>

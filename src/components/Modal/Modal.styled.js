@@ -29,15 +29,20 @@ export const CloseIcon = styled.div`
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
+
   cursor: pointer;
 
-  & img {
+  & svg {
+    width: 2rem;
+    height: 2rem;
+
     border-radius: 50%;
+
     transition: var(--transition);
   }
 
-  &:hover img {
-    background-color: var(--color-primary);
+  &:hover svg {
+    fill: var(--color-primary);
   }
 `;
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { loginUser } from "../../../store/auth/authOperations";
@@ -6,11 +7,16 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { ErrorDiv, FormButton, Input, Label, StyledForm } from "../Forms.styled";
+import sprite from "../../../assets/images/sprite.svg";
+import { ErrorDiv, FormButton, IconEye, Input, Label, StyledForm } from "../Forms.styled";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const [passVisible, setPassVisible] = useState(false);
+
   const { error } = useAuth();
+
+  const handleClickPassVisible = () => setPassVisible(!passVisible);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -52,12 +58,26 @@ const LoginForm = () => {
       </Label>
       <Label>
         <Input
-          type="password"
+          type={passVisible ? "text" : "password"}
           name="password"
           placeholder="Password"
           onChange={formik.handleChange}
           value={formik.values.password}
         />
+        {passVisible ? (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye`} />
+            </svg>
+          </IconEye>
+        ) : (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye-off`} />
+            </svg>
+          </IconEye>
+        )}
+
         {formik.touched.password && formik.errors.password ? (
           <ErrorDiv>{formik.errors.password}</ErrorDiv>
         ) : null}

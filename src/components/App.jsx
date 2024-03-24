@@ -1,12 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { lazy } from "react";
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { PrivateRoute } from "./PrivateRoute";
 
 import { useDispatch } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 
 import Layout from "./Layout/Layout";
-import { useEffect } from "react";
 import { refreshUser } from "../store/auth/authOperations";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
@@ -22,13 +22,16 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <b>Refreshing data...</b>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="teachers" element={<TeachersPage />} />
-        <Route path="favorites" element={<FavoritesPage />} />
+        <Route
+          path="favorites"
+          element={<PrivateRoute redirectTo="/" component={<FavoritesPage />} />}
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

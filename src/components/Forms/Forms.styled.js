@@ -36,6 +36,20 @@ export const Input = styled.input`
   }
 `;
 
+export const IconEye = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 0.8125rem;
+
+  border: none;
+  background-color: transparent;
+
+  & svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+`;
+
 export const ErrorDiv = styled.div`
   position: absolute;
   bottom: -1rem;

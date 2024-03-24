@@ -1,13 +1,22 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { registrationUser } from "../../../store/auth/authOperations";
 import { useAuth } from "../../../hooks/useAuth";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { ErrorDiv, FormButton, Input, StyledForm } from "../Forms.styled";
+
+import sprite from "../../../assets/images/sprite.svg";
+import { ErrorDiv, FormButton, IconEye, Input, Label, StyledForm } from "../Forms.styled";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const [passVisible, setPassVisible] = useState(false);
+
   const { error } = useAuth();
+
+  const handleClickPassVisible = () => setPassVisible(!passVisible);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -37,34 +46,55 @@ const RegistrationForm = () => {
 
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      <Input
-        type="text"
-        name="name"
-        placeholder="Name"
-        onChange={formik.handleChange}
-        value={formik.values.name}
-      />
-      {formik.touched.name && formik.errors.name ? <ErrorDiv>{formik.errors.name}</ErrorDiv> : null}
-      <Input
-        type="email"
-        name="email"
-        placeholder="Email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <ErrorDiv>{formik.errors.email}</ErrorDiv>
-      ) : null}
-      <Input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={formik.handleChange}
-        value={formik.values.password}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <ErrorDiv>{formik.errors.password}</ErrorDiv>
-      ) : null}
+      <Label>
+        <Input
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+        {formik.touched.name && formik.errors.name ? (
+          <ErrorDiv>{formik.errors.name}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <ErrorDiv>{formik.errors.email}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <Input
+          type={passVisible ? "text" : "password"}
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        {passVisible ? (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye`} />
+            </svg>
+          </IconEye>
+        ) : (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye-off`} />
+            </svg>
+          </IconEye>
+        )}
+        {formik.touched.password && formik.errors.password ? (
+          <ErrorDiv>{formik.errors.password}</ErrorDiv>
+        ) : null}
+      </Label>
       <FormButton type="submit">Sign Up</FormButton>
       {error && <ErrorDiv>{error}</ErrorDiv>}
     </StyledForm>

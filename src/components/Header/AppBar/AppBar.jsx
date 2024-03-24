@@ -1,11 +1,13 @@
+import { useAuth } from "../../../hooks/useAuth";
+
 import UserMenu from "../UserMenu/UserMenu";
-import useAuth from "../../../hooks/useAuth";
+
 import AuthNav from "../AuthNav/AuthNav";
 
 const AppBar = () => {
-  const { isAuth } = useAuth();
+  const { isLoggedIn } = useAuth();
 
-  return isAuth ? <UserMenu /> : <AuthNav />;
+  return isLoggedIn ? <UserMenu /> : <AuthNav />;
 };
 
 export default AppBar;

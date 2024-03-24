@@ -1,16 +1,28 @@
-import { BtnLog, BtnRegistration, BtnWrapper, Img } from "../index.styled";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { useAuth } from "../../../hooks/useAuth";
+import { resetError } from "../../../store/auth/authSlice";
+
+import Modal from "../../Modal/Modal";
+
+import LoginForm from "../../Forms/LoginForm/LoginForm";
+import RegistrationForm from "../../Forms/RegistrationForm/RegistrationForm";
 
 import logInIcon from "../../../assets/images/log-in.svg";
-import { useState } from "react";
-import Modal from "../../Modal/Modal";
-import RegistrationForm from "../../Forms/RegistrationForm/RegistrationForm";
-import LoginForm from "../../Forms/LoginForm/LoginForm";
+import { BtnLog, BtnRegistration, BtnWrapper, Img } from "../index.styled";
 
 const AuthNav = () => {
+  const dispatch = useDispatch();
+  const { error } = useAuth();
+
   const [showLogInModal, setShowLogInModal] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
 
-  const toggleLogInModal = () => setShowLogInModal((prev) => !prev);
+  const toggleLogInModal = () => {
+    setShowLogInModal((prev) => !prev);
+    if (error) dispatch(resetError());
+  };
   const toggleRegistrationModal = () => setShowRegistrationModal((prev) => !prev);
 
   return (

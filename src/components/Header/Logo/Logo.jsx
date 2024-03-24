@@ -1,4 +1,4 @@
-import logo from "../../../assets/ukraine.svg";
+import logo from "../../../assets/images/ukraine.svg";
 
 import { LogoText, LogoWrapper } from "./Logo.styled";
 

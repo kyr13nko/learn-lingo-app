@@ -16,9 +16,9 @@ import { authReducer } from "./auth/authSlice";
 import { teachersReducer } from "./teachers/teachersSlice";
 
 const authPersistConfig = {
-  key: "user",
+  key: "auth",
   storage,
-  whitelist: ["token"],
+  whitelist: ["user"],
 };
 
 export const store = configureStore({

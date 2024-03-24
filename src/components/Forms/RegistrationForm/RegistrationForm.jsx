@@ -1,20 +1,22 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { registrationUser } from "../../../store/auth/authOperations";
+import { useAuth } from "../../../hooks/useAuth";
+
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { setUser } from "../../../store/auth/authSlice";
-
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import sprite from "../../../assets/images/sprite.svg";
+import { ErrorDiv, FormButton, IconEye, Input, Label, StyledForm } from "../Forms.styled";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const [passVisible, setPassVisible] = useState(false);
 
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-  };
+  const { error } = useAuth();
+
+  const handleClickPassVisible = () => setPassVisible(!passVisible);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -24,46 +26,78 @@ const RegistrationForm = () => {
       .required("Password is required"),
   });
 
-  const handleSubmit = async (values, { resetForm }) => {
-    const { name, email, password } = values;
-
-    try {
-      const auth = getAuth();
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
-
-      await updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-
-      dispatch(
-        setUser({
-          user: { name: user.displayName, email: user.email },
-          token: user.accessToken,
-          id: user.uid,
-        })
-      );
-      resetForm();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      const { name, email, password } = values;
+      try {
+        dispatch(registrationUser({ name, email, password }));
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <Field type="text" name="name" placeholder="Name" />
-        <ErrorMessage name="name" component="div" />
-        <Field type="email" name="email" placeholder="Email" />
-        <ErrorMessage name="email" component="div" />
-        <Field type="password" name="password" placeholder="Password" />
-        <ErrorMessage name="password" component="div" />
-        <button type="submit">Sign Up</button>
-      </Form>
-    </Formik>
+    <StyledForm onSubmit={formik.handleSubmit}>
+      <Label>
+        <Input
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+        />
+        {formik.touched.name && formik.errors.name ? (
+          <ErrorDiv>{formik.errors.name}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <ErrorDiv>{formik.errors.email}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <Input
+          type={passVisible ? "text" : "password"}
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        {passVisible ? (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye`} />
+            </svg>
+          </IconEye>
+        ) : (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye-off`} />
+            </svg>
+          </IconEye>
+        )}
+        {formik.touched.password && formik.errors.password ? (
+          <ErrorDiv>{formik.errors.password}</ErrorDiv>
+        ) : null}
+      </Label>
+      <FormButton type="submit">Sign Up</FormButton>
+      {error && <ErrorDiv>{error}</ErrorDiv>}
+    </StyledForm>
   );
 };
 

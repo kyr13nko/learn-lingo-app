@@ -1,19 +1,22 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { loginUser } from "../../../store/auth/authOperations";
+import { useAuth } from "../../../hooks/useAuth";
+
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { setUser } from "../../../store/auth/authSlice";
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import sprite from "../../../assets/images/sprite.svg";
+import { ErrorDiv, FormButton, IconEye, Input, Label, StyledForm } from "../Forms.styled";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const [passVisible, setPassVisible] = useState(false);
 
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+  const { error } = useAuth();
+
+  const handleClickPassVisible = () => setPassVisible(!passVisible);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -22,40 +25,68 @@ const LoginForm = () => {
       .required("Password is required"),
   });
 
-  const handleSubmit = async (values, { resetForm }) => {
-    const { email, password } = values;
-
-    try {
-      const auth = getAuth();
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-
-      dispatch(
-        setUser({
-          user: { name: user.displayName, email: user.email },
-          token: user.accessToken,
-          id: user.uid,
-        })
-      );
-      resetForm();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { resetForm }) => {
+      const { email, password } = values;
+      try {
+        dispatch(loginUser({ email, password }));
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <Field type="email" name="email" placeholder="Email" />
-        <ErrorMessage name="email" component="div" />
-        <Field type="password" name="password" placeholder="Password" />
-        <ErrorMessage name="password" component="div" />
-        <button type="submit"> Log In </button>
-      </Form>
-    </Formik>
+    <StyledForm autoComplete="off" onSubmit={formik.handleSubmit}>
+      <Label>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <ErrorDiv>{formik.errors.email}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <Input
+          type={passVisible ? "text" : "password"}
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        {passVisible ? (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye`} />
+            </svg>
+          </IconEye>
+        ) : (
+          <IconEye type="button" onClick={handleClickPassVisible}>
+            <svg>
+              <use href={`${sprite}#icon-eye-off`} />
+            </svg>
+          </IconEye>
+        )}
+
+        {formik.touched.password && formik.errors.password ? (
+          <ErrorDiv>{formik.errors.password}</ErrorDiv>
+        ) : null}
+      </Label>
+      <Label>
+        <FormButton type="submit">Log In</FormButton>
+        {error && <ErrorDiv>{error}</ErrorDiv>}
+      </Label>
+    </StyledForm>
   );
 };
 

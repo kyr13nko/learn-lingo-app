@@ -1,18 +1,13 @@
 import { useDispatch } from "react-redux";
-
 import { registrationUser } from "../../../store/auth/authOperations";
-
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useAuth } from "../../../hooks/useAuth";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import { ErrorDiv, FormButton, Input, StyledForm } from "../Forms.styled";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
-
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-  };
+  const { error } = useAuth();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -22,32 +17,57 @@ const RegistrationForm = () => {
       .required("Password is required"),
   });
 
-  const handleSubmit = async (values, { resetForm }) => {
-    const { name, email, password } = values;
-    try {
-      dispatch(registrationUser({ name, email, password }));
-      resetForm();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      const { name, email, password } = values;
+      try {
+        dispatch(registrationUser({ name, email, password }));
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <Field type="text" name="name" placeholder="Name" />
-        <ErrorMessage name="name" component="div" />
-        <Field type="email" name="email" placeholder="Email" />
-        <ErrorMessage name="email" component="div" />
-        <Field type="password" name="password" placeholder="Password" />
-        <ErrorMessage name="password" component="div" />
-        <button type="submit">Sign Up</button>
-      </Form>
-    </Formik>
+    <StyledForm onSubmit={formik.handleSubmit}>
+      <Input
+        type="text"
+        name="name"
+        placeholder="Name"
+        onChange={formik.handleChange}
+        value={formik.values.name}
+      />
+      {formik.touched.name && formik.errors.name ? <ErrorDiv>{formik.errors.name}</ErrorDiv> : null}
+      <Input
+        type="email"
+        name="email"
+        placeholder="Email"
+        onChange={formik.handleChange}
+        value={formik.values.email}
+      />
+      {formik.touched.email && formik.errors.email ? (
+        <ErrorDiv>{formik.errors.email}</ErrorDiv>
+      ) : null}
+      <Input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={formik.handleChange}
+        value={formik.values.password}
+      />
+      {formik.touched.password && formik.errors.password ? (
+        <ErrorDiv>{formik.errors.password}</ErrorDiv>
+      ) : null}
+      <FormButton type="submit">Sign Up</FormButton>
+      {error && <ErrorDiv>{error}</ErrorDiv>}
+    </StyledForm>
   );
 };
 

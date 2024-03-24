@@ -11,8 +11,10 @@ export const GlobalStyles = createGlobalStyle`
     --color-bg: #F8F8F8;
     
     --color-black: #121417;
-    --color-black-70: #12141770;
-    --color-black-20: #12141720;
+    --color-black-80: rgba(18, 20, 23, 0.8);
+    --color-black-70: rgba(18, 20, 23, 0.7);
+    --color-black-20: rgba(18, 20, 23, 0.2);
+    --color-black-10: rgba(18, 20, 23, 0.1);
 
     --color-grey: #8A8A89;
     --color-white: #ffffff;
@@ -21,6 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-secondary: #FFDC86;
 
     --color-green: #38CD3E;
+    --color-red: #FF0000;
 
     --transition: all 400ms ease;
   }
@@ -62,6 +65,25 @@ export const GlobalStyles = createGlobalStyle`
   button {
     background-color: transparent;
     cursor: pointer;
+  }
+`;
+
+export const Button = styled.button`
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.56;
+
+  background-color: var(--color-primary);
+
+  border: none;
+  border-radius: 0.75rem;
+
+  padding: 1rem;
+
+  transition: var(--transition);
+
+  &:hover {
+    background-color: var(--color-secondary);
   }
 `;
 

@@ -27,6 +27,7 @@ export const registrationUser = createAsyncThunk(
       };
     } catch (error) {
       return rejectWithValue(error.message);
+      console.log("error.message", error.message);
     }
   }
 );
@@ -59,7 +60,6 @@ export const logoutUser = createAsyncThunk("auth/logout", async (_, { rejectWith
 export const refreshUser = createAsyncThunk("auth/refresh", (_, { rejectWithValue }) => {
   try {
     const auth = getAuth();
-    console.log("auth:", auth);
     return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         unsubscribe();

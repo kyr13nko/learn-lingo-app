@@ -1,7 +1,9 @@
-/* eslint-disable react/prop-types */
-
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+
+import CloseIconSvg from "../../assets/images/close-icon.svg";
+
+import { CloseIcon, ModalStyled, Overlay, Text, Title } from "./Modal.styled";
 
 const modalRoot = document.getElementById("modal-root");
 
@@ -25,11 +27,16 @@ const Modal = ({ title, text, onClose, children }) => {
   };
 
   return createPortal(
-    <div onClick={handleBackdropClick}>
-      <h2>{title}</h2>
-      <p>{text}</p>
-      <div>{children}</div>
-    </div>,
+    <Overlay onClick={handleBackdropClick}>
+      <ModalStyled>
+        <CloseIcon onClick={onClose}>
+          <img src={CloseIconSvg} />
+        </CloseIcon>
+        <Title>{title}</Title>
+        <Text>{text}</Text>
+        {children}
+      </ModalStyled>
+    </Overlay>,
     modalRoot
   );
 };

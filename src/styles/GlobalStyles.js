@@ -22,8 +22,11 @@ export const GlobalStyles = createGlobalStyle`
     --color-primary: #F4C550;
     --color-secondary: #FFDC86;
 
+    --color-avatar: #FBE9BA;
+
     --color-green: #38CD3E;
     --color-red: #FF0000;
+
 
     --transition: all 400ms ease;
   }
@@ -31,6 +34,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+    line-height: 1.5;
     font-optical-sizing: auto;
     margin: 0;
 

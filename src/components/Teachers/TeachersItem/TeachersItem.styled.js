@@ -46,6 +46,62 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  position: relative;
+`;
+
+export const Info = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+
+  position: absolute;
+  right: 0;
+`;
+
+export const InfoList = styled.ul`
+  display: flex;
+  gap: 2rem;
+
+  line-height: 1.5;
+
+  & li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    position: relative;
+  }
+  & li:not(:first-child)::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -1rem;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 16px;
+    background-color: var(--color-black-20);
+  }
+
+  & li span {
+    color: var(--color-green);
+  }
+
+  & li svg {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+export const InfoButton = styled.button`
+  border: none;
+  background-color: transparent;
+
+  & svg {
+    width: 1.625rem;
+    height: 1.625rem;
+  }
 `;
 
 export const Content = styled.div`
@@ -131,11 +187,41 @@ export const ReviewerWrapper = styled.div`
 export const Reviewer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+`;
 
-  & svg {
+export const Avatar = styled.div`
+  font-size: 20px;
+  line-height: 1;
+  width: 44px;
+  height: 44px;
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ReviewerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+
+  & div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & div svg {
     width: 1rem;
     height: 1rem;
+  }
+
+  & div p {
+    font-size: 0.875rem;
+    line-height: 1.29;
   }
 `;
 

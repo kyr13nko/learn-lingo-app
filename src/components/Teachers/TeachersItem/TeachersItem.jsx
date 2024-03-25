@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+import heartNormal from "../../../assets/images/heart-normal.svg";
 import sprite from "../../../assets/images/sprite.svg";
+
 import {
   Content,
   ImageWrapper,
@@ -18,6 +20,11 @@ import {
   Reviewer,
   ReviewerWrapper,
   TrialButton,
+  Info,
+  InfoList,
+  InfoButton,
+  Avatar,
+  ReviewerInfo,
 } from "./TeachersItem.styled";
 import Modal from "../../Modal/Modal";
 import TrialForm from "../../Forms/TrialForm/TrialForm";
@@ -25,6 +32,7 @@ import TrialForm from "../../Forms/TrialForm/TrialForm";
 const TeachersItem = ({ teacher }) => {
   const [readMore, setReadMore] = useState(false);
   const [showTrialModal, setShowTrialModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const {
     avatar_url,
@@ -41,6 +49,10 @@ const TeachersItem = ({ teacher }) => {
     surname,
   } = teacher;
 
+  const handleClickToFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   const toggleTrialModal = () => {
     setShowTrialModal(!showTrialModal);
   };
@@ -52,6 +64,44 @@ const TeachersItem = ({ teacher }) => {
           <Image src={avatar_url} alt={`avatar of ${name} ${surname}`} />
         </ImageWrapper>
         <InfoWrapper>
+          <Info>
+            <InfoList>
+              <li>
+                <svg>
+                  <use href={`${sprite}#book-open`}></use>
+                </svg>
+                <p>Lessons online</p>
+              </li>
+              <li>
+                <p>Lessons done: {lessons_done}</p>
+              </li>
+              <li>
+                <svg>
+                  <use href={`${sprite}#rating`}></use>
+                </svg>
+                <p>Rating: {rating}</p>
+              </li>
+              <li>
+                <p>
+                  Price / 1 hour: <span>{price_per_hour}$</span>
+                </p>
+              </li>
+            </InfoList>
+            {!isFavorite ? (
+              <InfoButton type="button" onClick={handleClickToFavorite}>
+                <svg>
+                  <use href={`${sprite}#heart-normal`} />
+                </svg>
+              </InfoButton>
+            ) : (
+              <InfoButton type="button" onClick={handleClickToFavorite}>
+                <svg>
+                  <use href={`${sprite}#heart-checked`} />
+                </svg>
+              </InfoButton>
+            )}
+          </Info>
+
           <Content>
             <Text>Languages</Text>
             <TeacherName>{`${name} ${surname}`}</TeacherName>
@@ -78,11 +128,16 @@ const TeachersItem = ({ teacher }) => {
               {reviews.map(({ reviewer_name, reviewer_rating, comment }, index) => (
                 <ReviewerWrapper key={index}>
                   <Reviewer>
-                    <Text>{reviewer_name}</Text>
-                    <svg>
-                      <use href={`${sprite}#icon-star`}></use>
-                    </svg>
-                    <p>{reviewer_rating}.0</p>
+                    <Avatar>{reviewer_name.charAt(0)}</Avatar>
+                    <ReviewerInfo>
+                      <Text>{reviewer_name}</Text>
+                      <div>
+                        <svg>
+                          <use href={`${sprite}#rating`}></use>
+                        </svg>
+                        <p>{reviewer_rating}.0</p>
+                      </div>
+                    </ReviewerInfo>
                   </Reviewer>
                   <p>{comment}</p>
                 </ReviewerWrapper>
@@ -110,7 +165,7 @@ const TeachersItem = ({ teacher }) => {
           title="Book trial lesson"
           text="Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs."
         >
-          <TrialForm />
+          <TrialForm teacher={teacher} />
         </Modal>
       )}
     </>

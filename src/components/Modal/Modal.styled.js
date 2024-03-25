@@ -21,7 +21,7 @@ export const ModalStyled = styled.div`
   border-radius: 1.875rem;
   background-color: var(--color-white);
   width: 35.3125rem;
-  /* height: calc(100% - 1.25rem); */
+  max-height: calc(100% - 1.25rem);
   padding: 4rem;
 `;
 
@@ -47,6 +47,7 @@ export const CloseIcon = styled.div`
 `;
 
 export const Title = styled.h2`
+  font-weight: 500;
   font-size: 2.5rem;
   line-height: 1.2;
   letter-spacing: -0.02em;

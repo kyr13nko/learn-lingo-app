@@ -81,13 +81,13 @@ const RegistrationForm = () => {
         {passVisible ? (
           <IconEye type="button" onClick={handleClickPassVisible}>
             <svg>
-              <use href={`${sprite}#icon-eye`} />
+              <use href={`${sprite}#eye`} />
             </svg>
           </IconEye>
         ) : (
           <IconEye type="button" onClick={handleClickPassVisible}>
             <svg>
-              <use href={`${sprite}#icon-eye-off`} />
+              <use href={`${sprite}#eye-off`} />
             </svg>
           </IconEye>
         )}

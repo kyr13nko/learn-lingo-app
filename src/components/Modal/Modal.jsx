@@ -31,7 +31,7 @@ const Modal = ({ title, text, onClose, children }) => {
         <CloseIcon onClick={onClose}>
           {/* <img src={CloseIconSvg} /> */}
           <svg>
-            <use href={`${sprite}#close-icon`}></use>
+            <use href={`${sprite}#close`}></use>
           </svg>
         </CloseIcon>
         <Title>{title}</Title>

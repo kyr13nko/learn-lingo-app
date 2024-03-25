@@ -1,30 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 import { authReducer } from "./auth/authSlice";
 import { teachersReducer } from "./teachers/teachersSlice";
-
-const authPersistConfig = {
-  key: "auth",
-  storage,
-  whitelist: ["user"],
-};
+import { favoritesReducer } from "./favorites/favoritesSlice";
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
+    auth: authReducer,
     teachers: teachersReducer,
+    favorites: favoritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

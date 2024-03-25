@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import heartNormal from "../../../assets/images/heart-normal.svg";
+import { selectFavorites } from "../../../store/favorites/favoritesSelectors";
+
+import Modal from "../../Modal/Modal";
+import TrialForm from "../../Forms/TrialForm/TrialForm";
+
 import sprite from "../../../assets/images/sprite.svg";
 
 import {
@@ -26,14 +31,9 @@ import {
   Avatar,
   ReviewerInfo,
 } from "./TeachersItem.styled";
-import Modal from "../../Modal/Modal";
-import TrialForm from "../../Forms/TrialForm/TrialForm";
+import { addToFavorite, delFromFavorite } from "../../../store/favorites/favoritesSlice";
 
 const TeachersItem = ({ teacher }) => {
-  const [readMore, setReadMore] = useState(false);
-  const [showTrialModal, setShowTrialModal] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
-
   const {
     avatar_url,
     conditions,
@@ -49,13 +49,27 @@ const TeachersItem = ({ teacher }) => {
     surname,
   } = teacher;
 
-  const handleClickToFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const dispatch = useDispatch();
+
+  const [showTrialModal, setShowTrialModal] = useState(false);
+  const [readMore, setReadMore] = useState(false);
+
+  const favorites = useSelector(selectFavorites);
+
+  const handleAddToFavorite = () => {
+    dispatch(addToFavorite(teacher));
+  };
+
+  const handleDelToFavorite = () => {
+    dispatch(delFromFavorite(teacher));
   };
 
   const toggleTrialModal = () => {
     setShowTrialModal(!showTrialModal);
   };
+
+  const isInFavorite = favorites.find((item) => item.avatar_url === avatar_url);
+
   return (
     <>
       <Item>
@@ -87,14 +101,14 @@ const TeachersItem = ({ teacher }) => {
                 </p>
               </li>
             </InfoList>
-            {!isFavorite ? (
-              <InfoButton type="button" onClick={handleClickToFavorite}>
+            {!isInFavorite ? (
+              <InfoButton type="button" onClick={handleAddToFavorite}>
                 <svg>
                   <use href={`${sprite}#heart-normal`} />
                 </svg>
               </InfoButton>
             ) : (
-              <InfoButton type="button" onClick={handleClickToFavorite}>
+              <InfoButton type="button" onClick={handleDelToFavorite}>
                 <svg>
                   <use href={`${sprite}#heart-checked`} />
                 </svg>

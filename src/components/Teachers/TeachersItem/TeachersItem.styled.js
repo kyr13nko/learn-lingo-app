@@ -94,14 +94,11 @@ export const InfoList = styled.ul`
   }
 `;
 
-export const InfoButton = styled.button`
-  border: none;
-  background-color: transparent;
+export const HeartSvg = styled.svg`
+  width: 1.625rem;
+  height: 1.625rem;
 
-  & svg {
-    width: 1.625rem;
-    height: 1.625rem;
-  }
+  cursor: pointer;
 `;
 
 export const Content = styled.div`

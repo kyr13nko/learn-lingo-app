@@ -112,3 +112,21 @@ export const Container = styled.div`
     padding: 0 8rem;
   }
 `;
+
+export const Section = styled.section`
+  @media screen and (min-width: 320px) {
+    padding: 1.25rem 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 1.25rem 0 2rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 1.25rem 0 4rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 1.25rem 0 5rem;
+  }
+`;

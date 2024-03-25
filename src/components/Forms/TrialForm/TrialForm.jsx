@@ -38,7 +38,6 @@ const TrialForm = ({ teacher }) => {
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const { name, email, phone, reason } = values;
-
       console.log("values", values);
       try {
         resetForm();

@@ -20,6 +20,9 @@ export const favoritesSlice = createSlice({
         (teacher) => teacher.avatar_url !== favoriteTeacher.avatar_url
       );
     },
+    clearAfterLogOut: (state) => {
+      state.items = [];
+    },
   },
 });
 
@@ -29,6 +32,6 @@ const favoritesConfig = {
   whitelist: ["items"],
 };
 
-export const { addToFavorite, delFromFavorite } = favoritesSlice.actions;
+export const { addToFavorite, delFromFavorite, clearAfterLogOut } = favoritesSlice.actions;
 
 export const favoritesReducer = persistReducer(favoritesConfig, favoritesSlice.reducer);

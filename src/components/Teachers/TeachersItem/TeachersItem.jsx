@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectFavorites } from "../../../store/favorites/favoritesSelectors";
+import { useAuth } from "../../../hooks/useAuth";
 
 import Modal from "../../Modal/Modal";
 import TrialForm from "../../Forms/TrialForm/TrialForm";
@@ -27,9 +28,9 @@ import {
   TrialButton,
   Info,
   InfoList,
-  InfoButton,
   Avatar,
   ReviewerInfo,
+  HeartSvg,
 } from "./TeachersItem.styled";
 import { addToFavorite, delFromFavorite } from "../../../store/favorites/favoritesSlice";
 
@@ -54,13 +55,18 @@ const TeachersItem = ({ teacher }) => {
   const [showTrialModal, setShowTrialModal] = useState(false);
   const [readMore, setReadMore] = useState(false);
 
+  const { isLoggedIn } = useAuth();
   const favorites = useSelector(selectFavorites);
 
-  const handleAddToFavorite = () => {
-    dispatch(addToFavorite(teacher));
+  const handleAddFavorite = () => {
+    if (isLoggedIn) {
+      dispatch(addToFavorite(teacher));
+    } else {
+      alert("Please, register or log in to the app!");
+    }
   };
 
-  const handleDelToFavorite = () => {
+  const handleDelFavorite = () => {
     dispatch(delFromFavorite(teacher));
   };
 
@@ -101,18 +107,15 @@ const TeachersItem = ({ teacher }) => {
                 </p>
               </li>
             </InfoList>
+
             {!isInFavorite ? (
-              <InfoButton type="button" onClick={handleAddToFavorite}>
-                <svg>
-                  <use href={`${sprite}#heart-normal`} />
-                </svg>
-              </InfoButton>
+              <HeartSvg onClick={handleAddFavorite}>
+                <use href={`${sprite}#heart-normal`} />
+              </HeartSvg>
             ) : (
-              <InfoButton type="button" onClick={handleDelToFavorite}>
-                <svg>
-                  <use href={`${sprite}#heart-checked`} />
-                </svg>
-              </InfoButton>
+              <HeartSvg onClick={handleDelFavorite}>
+                <use href={`${sprite}#heart-checked`} />
+              </HeartSvg>
             )}
           </Info>
 

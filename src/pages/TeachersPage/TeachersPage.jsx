@@ -3,7 +3,8 @@ import TeachersList from "../../components/Teachers/TeachersList/TeachersList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeachers } from "../../store/teachers/teachersOperations";
 import { selectTeachers } from "../../store/teachers/teachersSelectors";
-import { Container } from "../../styles/GlobalStyles";
+import { Container, Section } from "../../styles/GlobalStyles";
+import Filter from "../../components/Filter/Filter";
 
 const TeachersPage = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,10 @@ const TeachersPage = () => {
   const teachers = useSelector(selectTeachers);
   return (
     <Container>
-      <TeachersList teachers={teachers} />
+      <Section>
+        <Filter teachers={teachers} />
+        <TeachersList teachers={teachers} />
+      </Section>
     </Container>
   );
 };

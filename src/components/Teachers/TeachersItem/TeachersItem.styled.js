@@ -5,6 +5,8 @@ export const Item = styled.li`
   display: flex;
   gap: 3rem;
 
+  width: 100%;
+
   background-color: var(--color-white);
   border-radius: 1.5rem;
 
@@ -45,6 +47,7 @@ export const Image = styled.img`
 export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 1rem;
 
   position: relative;

@@ -5,6 +5,7 @@ const initialState = {
   level: "",
   price: "",
   isFiltered: false,
+  page: "",
 };
 
 const filterSlice = createSlice({
@@ -23,9 +24,12 @@ const filterSlice = createSlice({
       state.price = "";
       state.isFiltered = false;
     },
+    pageLocation: (state, { payload }) => {
+      state.page = payload;
+    },
   },
 });
 
-export const { updateFilter, resetFilter } = filterSlice.actions;
+export const { updateFilter, resetFilter, pageLocation } = filterSlice.actions;
 
 export const filterReducer = filterSlice.reducer;

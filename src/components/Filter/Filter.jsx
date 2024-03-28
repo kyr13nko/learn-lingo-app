@@ -4,7 +4,7 @@ import { getAllValues } from "../../helpers/getAllValues";
 
 import { Label, SelectWrapper, customStyles } from "./Filter.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFilter } from "../../store/filter/filterSlice";
+import { pageLocation, updateFilter } from "../../store/filter/filterSlice";
 import { selectFilter } from "../../store/filter/filterSelectors";
 
 const Filter = ({ teachers }) => {
@@ -18,7 +18,6 @@ const Filter = ({ teachers }) => {
 
   const handleFilterChange = (field) => (option) => {
     const value = option ? option.value : "";
-    console.log(`${field} value`, value);
 
     const newFilter = { ...filter, [field]: value };
     dispatch(updateFilter(newFilter));

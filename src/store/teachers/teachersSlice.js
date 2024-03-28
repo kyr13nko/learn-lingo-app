@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchTeachers } from "./teachersOperations";
 
+const initialState = {
+  items: [],
+  loading: false,
+  error: null,
+};
+
 const teachersSlice = createSlice({
   name: "teachers",
-  initialState: {
-    items: [],
-    loading: false,
-    error: null,
-  },
+  initialState,
   extraReducers: (builder) => {
     builder.addCase(fetchTeachers.pending, (state) => {
       state.loading = true;

@@ -3,22 +3,25 @@ import Select from "react-select";
 import { getAllValues } from "../../helpers/getAllValues";
 
 import { Label, SelectWrapper, customStyles } from "./Filter.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilter } from "../../store/filter/filterSlice";
+import { selectFilter } from "../../store/filter/filterSelectors";
 
 const Filter = ({ teachers }) => {
+  const dispatch = useDispatch();
+
+  const filter = useSelector(selectFilter);
+
   const levels = getAllValues(teachers, "levels");
   const languages = getAllValues(teachers, "languages");
   const prices = getAllValues(teachers, "price_per_hour");
 
-  const handleLanguageChange = (option) => {
-    console.log("option", option);
-  };
+  const handleFilterChange = (field) => (option) => {
+    const value = option ? option.value : "";
+    console.log(`${field} value`, value);
 
-  const handleLevelChange = (option) => {
-    console.log("option", option);
-  };
-
-  const handlePriceChange = (option) => {
-    console.log("option", option);
+    const newFilter = { ...filter, [field]: value };
+    dispatch(updateFilter(newFilter));
   };
 
   return (
@@ -26,7 +29,7 @@ const Filter = ({ teachers }) => {
       <div>
         <Label>Languages</Label>
         <Select
-          onChange={handleLanguageChange}
+          onChange={handleFilterChange("language")}
           isClearable
           options={languages.map((level) => ({ value: level, label: level }))}
           styles={customStyles(240)}
@@ -35,7 +38,7 @@ const Filter = ({ teachers }) => {
       <div>
         <Label>Level of knowledge</Label>
         <Select
-          onChange={handleLevelChange}
+          onChange={handleFilterChange("level")}
           isClearable
           options={levels.map((level) => ({ value: level, label: level }))}
           styles={customStyles(270)}
@@ -44,7 +47,7 @@ const Filter = ({ teachers }) => {
       <div>
         <Label>Price</Label>
         <Select
-          onChange={handlePriceChange}
+          onChange={handleFilterChange("price")}
           isClearable
           options={prices.map((level) => ({ value: level, label: `${level} $` }))}
           styles={customStyles(140)}

@@ -12,7 +12,7 @@ export const favoritesSlice = createSlice({
   reducers: {
     addToFavorite: (state, { payload }) => {
       const favoriteTeacher = payload;
-      state.items.push(favoriteTeacher);
+      state.items = [...state.items, favoriteTeacher];
     },
     delFromFavorite: (state, { payload }) => {
       const favoriteTeacher = payload;

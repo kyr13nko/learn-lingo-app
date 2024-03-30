@@ -17,9 +17,10 @@ const teachersSlice = createSlice({
     });
     builder.addCase(fetchTeachers.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.items = payload;
-      console.log("payload", payload);
-      // state.items = [...state.items, ...payload];
+      state.items =
+        state.items[0]?.avatar_url === payload[0]?.avatar_url
+          ? payload
+          : [...state.items, ...payload];
     });
     builder.addCase(fetchTeachers.rejected, (state, { payload }) => {
       state.loading = false;

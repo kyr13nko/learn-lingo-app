@@ -21,9 +21,9 @@ const TeachersPage = () => {
   const loading = useSelector(selectLoading);
 
   useEffect(() => {
+    dispatch(pageLocation("teachers"));
     dispatch(fetchTeachers(currentPage));
     dispatch(resetFilter());
-    dispatch(pageLocation("teachers"));
   }, [dispatch, currentPage]);
 
   const teachers = useSelector(selectTeachers);

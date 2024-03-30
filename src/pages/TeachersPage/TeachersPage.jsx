@@ -9,7 +9,8 @@ import { pageLocation, resetFilter } from "../../store/filter/filterSlice";
 import TeachersList from "../../components/Teachers/TeachersList/TeachersList";
 import Filter from "../../components/Filter/Filter";
 
-import { Container, Section } from "../../styles/GlobalStyles";
+import { Button, Container, Section } from "../../styles/GlobalStyles";
+import { ButtonWrapper, LoadMoreButton } from "./TeachersPage.styled";
 
 const TeachersPage = () => {
   const dispatch = useDispatch();
@@ -43,11 +44,13 @@ const TeachersPage = () => {
         ) : (
           <TeachersList teachers={isFiltered ? filteredTeachers : teachers} />
         )}
-        {!loading && !isEndOfTeachers && !isFiltered && (
-          <button type="button" onClick={handleLoadMore}>
-            Load more
-          </button>
-        )}
+        <ButtonWrapper>
+          {!loading && !isEndOfTeachers && !isFiltered && (
+            <LoadMoreButton type="button" onClick={handleLoadMore}>
+              Load more
+            </LoadMoreButton>
+          )}
+        </ButtonWrapper>
       </Section>
     </Container>
   );

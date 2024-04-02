@@ -1,11 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
+
+import { resetFilter, updateFilter } from "../../store/filter/filterSlice";
+import { selectFilter } from "../../store/filter/filterSelectors";
 
 import { getAllValues } from "../../helpers/getAllValues";
 
 import { Label, SelectWrapper, customStyles } from "./Filter.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { pageLocation, updateFilter } from "../../store/filter/filterSlice";
-import { selectFilter } from "../../store/filter/filterSelectors";
 
 const Filter = ({ teachers }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,8 @@ const Filter = ({ teachers }) => {
 
     const newFilter = { ...filter, [field]: value };
     dispatch(updateFilter(newFilter));
+
+    if (value === "") dispatch(resetFilter());
   };
 
   return (

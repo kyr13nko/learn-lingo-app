@@ -19,8 +19,12 @@ const TeachersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const isFiltered = useSelector(selectIsFiltered);
+  console.log("TeachersPage ---> isFiltered:", isFiltered);
+
   const filteredTeachers = useSelector(selectFilteredTeachers);
+
   const loading = useSelector(selectLoading);
+  console.log("TeachersPage ---> loading:", loading);
 
   useEffect(() => {
     dispatch(pageLocation("teachers"));
@@ -35,6 +39,7 @@ const TeachersPage = () => {
   };
 
   const isEndOfTeachers = teachers.length % 4 !== 0;
+  console.log("TeachersPage ---> isEndOfTeachers:", isEndOfTeachers);
 
   return (
     <Container>

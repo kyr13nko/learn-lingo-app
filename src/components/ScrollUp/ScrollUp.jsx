@@ -14,7 +14,9 @@ const ScrollUp = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (isVisible) {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
 

@@ -8,8 +8,9 @@ import { pageLocation, resetFilter } from "../../store/filter/filterSlice";
 
 import TeachersList from "../../components/Teachers/TeachersList/TeachersList";
 import Filter from "../../components/Filter/Filter";
+import ScrollUp from "../../components/ScrollUp/ScrollUp";
 
-import { Button, Container, Section } from "../../styles/GlobalStyles";
+import { Container, Section } from "../../styles/GlobalStyles";
 import { ButtonWrapper, LoadMoreButton } from "./TeachersPage.styled";
 
 const TeachersPage = () => {
@@ -51,6 +52,7 @@ const TeachersPage = () => {
             </LoadMoreButton>
           )}
         </ButtonWrapper>
+        <ScrollUp />
       </Section>
     </Container>
   );

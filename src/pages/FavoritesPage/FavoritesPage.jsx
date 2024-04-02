@@ -7,6 +7,7 @@ import { selectFilteredTeachers, selectIsFiltered } from "../../store/filter/fil
 
 import TeachersList from "../../components/Teachers/TeachersList/TeachersList";
 import Filter from "../../components/Filter/Filter";
+import ScrollUp from "../../components/ScrollUp/ScrollUp";
 
 import { Container, Section } from "../../styles/GlobalStyles";
 
@@ -33,6 +34,7 @@ const FavoritesPage = () => {
         ) : (
           <TeachersList teachers={isFiltered ? filteredTeachers : favorites} />
         )}
+        <ScrollUp />
       </Section>
     </Container>
   );

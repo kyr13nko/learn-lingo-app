@@ -1,4 +1,5 @@
 import AppBar from "./AppBar/AppBar";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import Logo from "./Logo/Logo";
 import Navigation from "./Navigation/Navigation";
 
@@ -11,6 +12,7 @@ const Header = () => {
         <Logo />
         <Navigation />
         <AppBar />
+        <BurgerMenu />
       </HeaderContainer>
     </StyledHeader>
   );

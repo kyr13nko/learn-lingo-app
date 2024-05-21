@@ -98,18 +98,13 @@ export const Container = styled.div`
     margin: 0 auto;
   }
 
-  @media screen and (min-width: 768px) {
-    max-width: 768px;
+  @media screen and (min-width: 1200px) {
     padding: 0 2rem;
-  }
-
-  @media screen and (min-width: 1024px) {
-    max-width: 1024px;
   }
 
   @media screen and (min-width: 1440px) {
     max-width: 1440px;
-    padding: 0 8rem;
+    padding: 0 3rem;
   }
 `;
 

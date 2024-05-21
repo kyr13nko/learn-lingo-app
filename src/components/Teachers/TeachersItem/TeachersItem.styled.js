@@ -3,7 +3,10 @@ import { Button } from "../../../styles/GlobalStyles";
 
 export const Item = styled.li`
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
+  gap: 1rem;
+
+  position: relative;
 
   width: 100%;
 
@@ -11,6 +14,25 @@ export const Item = styled.li`
   border-radius: 1.5rem;
 
   padding: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 3rem;
+  }
+`;
+
+export const HeartBlock = styled.div`
+  position: absolute;
+  right: 1.5rem;
+
+  z-index: 10;
+`;
+
+export const HeartSvg = styled.svg`
+  width: 1.625rem;
+  height: 1.625rem;
+
+  cursor: pointer;
 `;
 
 export const ImageWrapper = styled.div`
@@ -53,20 +75,27 @@ export const InfoWrapper = styled.div`
   position: relative;
 `;
 
-export const Info = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4rem;
-
-  position: absolute;
-  right: 0;
-`;
-
 export const InfoList = styled.ul`
-  display: flex;
-  gap: 2rem;
+  display: none;
 
-  line-height: 1.5;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 0.5rem 2rem;
+
+    position: relative;
+    right: 0;
+
+    line-height: 1.5;
+
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 1200px) {
+    position: absolute;
+    right: 4rem;
+
+    margin-bottom: 0;
+  }
 
   & li {
     display: flex;
@@ -75,33 +104,35 @@ export const InfoList = styled.ul`
 
     position: relative;
   }
-  & li:not(:first-child)::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: -1rem;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 16px;
-    background-color: var(--color-black-20);
-  }
 
   & li span {
     color: var(--color-green);
   }
 
   & li svg {
+    display: none;
+
     width: 16px;
     height: 16px;
+
+    @media screen and (min-width: 854px) {
+      display: block;
+    }
   }
-`;
 
-export const HeartSvg = styled.svg`
-  width: 1.625rem;
-  height: 1.625rem;
-
-  cursor: pointer;
+  @media screen and (min-width: 854px) {
+    & li:not(:first-child)::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: -1rem;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 16px;
+      background-color: var(--color-black-20);
+    }
+  }
 `;
 
 export const Content = styled.div`

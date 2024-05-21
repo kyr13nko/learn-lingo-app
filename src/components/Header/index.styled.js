@@ -12,11 +12,14 @@ export const HeaderContainer = styled(Container)`
 `;
 
 export const BtnWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
+  display: none;
 
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+`;
 
 export const Btn = styled.button`
   font-weight: 700;

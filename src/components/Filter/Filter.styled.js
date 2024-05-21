@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const SelectWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
 
   margin-bottom: 2rem;

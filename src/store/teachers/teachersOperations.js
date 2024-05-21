@@ -41,11 +41,8 @@ export const fetchTeachers = createAsyncThunk(
 // export const fetchTeachers = createAsyncThunk(
 //   "teachers/fetchTeachers",
 //   async (currentPage, thunkAPI) => {
-//     console.log("currentPage:", currentPage);
-
 //     try {
 //       const snapshot = await get(ref(database, "teachers"));
-//       console.log("snapshot.val()", snapshot.val());
 //       return snapshot.val();
 //     } catch (error) {
 //       console.error;

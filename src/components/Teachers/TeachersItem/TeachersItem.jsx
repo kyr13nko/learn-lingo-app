@@ -26,10 +26,10 @@ import {
   Reviewer,
   ReviewerWrapper,
   TrialButton,
-  Info,
   InfoList,
   Avatar,
   ReviewerInfo,
+  HeartBlock,
   HeartSvg,
 } from "./TeachersItem.styled";
 import { addToFavorite, delFromFavorite } from "../../../store/favorites/favoritesSlice";
@@ -79,12 +79,25 @@ const TeachersItem = ({ teacher }) => {
   return (
     <>
       <Item>
+        <HeartBlock>
+          {!isInFavorite ? (
+            <HeartSvg onClick={handleAddFavorite}>
+              <use href={`${sprite}#heart-normal`} />
+            </HeartSvg>
+          ) : (
+            <HeartSvg onClick={handleDelFavorite}>
+              <use href={`${sprite}#heart-checked`} />
+            </HeartSvg>
+          )}
+        </HeartBlock>
         <ImageWrapper>
           <Online />
           <Image src={avatar_url} alt={`avatar of ${name} ${surname}`} />
         </ImageWrapper>
         <InfoWrapper>
-          <Info>
+          <Content>
+            <Text>Languages</Text>
+            <TeacherName>{`${name} ${surname}`}</TeacherName>
             <InfoList>
               <li>
                 <svg>
@@ -107,21 +120,6 @@ const TeachersItem = ({ teacher }) => {
                 </p>
               </li>
             </InfoList>
-
-            {!isInFavorite ? (
-              <HeartSvg onClick={handleAddFavorite}>
-                <use href={`${sprite}#heart-normal`} />
-              </HeartSvg>
-            ) : (
-              <HeartSvg onClick={handleDelFavorite}>
-                <use href={`${sprite}#heart-checked`} />
-              </HeartSvg>
-            )}
-          </Info>
-
-          <Content>
-            <Text>Languages</Text>
-            <TeacherName>{`${name} ${surname}`}</TeacherName>
             <p>
               <Text>Speaks: </Text> <Upper>{languages.map((item) => item).join(", ")}</Upper>
             </p>

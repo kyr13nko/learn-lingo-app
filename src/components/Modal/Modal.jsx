@@ -29,9 +29,8 @@ const Modal = ({ title, text, onClose, children }) => {
     <Overlay onClick={handleBackdropClick}>
       <ModalStyled>
         <CloseIcon onClick={onClose}>
-          {/* <img src={CloseIconSvg} /> */}
           <svg>
-            <use href={`${sprite}#close`}/>
+            <use href={`${sprite}#close`} />
           </svg>
         </CloseIcon>
         <Title>{title}</Title>

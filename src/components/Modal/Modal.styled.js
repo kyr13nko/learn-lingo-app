@@ -20,9 +20,19 @@ export const ModalStyled = styled.div`
   transform: translate(-50%, -50%);
   border-radius: 1.875rem;
   background-color: var(--color-white);
-  width: 35.3125rem;
+  min-width: 85%;
+  max-width: 565px;
   max-height: calc(100% - 1.25rem);
-  padding: 4rem;
+
+  padding: 2.5rem 1rem;
+
+  @media screen and (min-width: 425px) {
+    padding: 3rem;
+  }
+  @media screen and (min-width: 660px) {
+    min-width: 565px;
+    padding: 4rem;
+  }
 `;
 
 export const CloseIcon = styled.div`

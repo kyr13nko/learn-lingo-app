@@ -101,7 +101,7 @@ const TeachersItem = ({ teacher }) => {
             <InfoList>
               <li>
                 <svg>
-                  <use href={`${sprite}#book-open`}></use>
+                  <use href={`${sprite}#book-open`} />
                 </svg>
                 <p>Lessons online</p>
               </li>
@@ -110,7 +110,7 @@ const TeachersItem = ({ teacher }) => {
               </li>
               <li>
                 <svg>
-                  <use href={`${sprite}#rating`}></use>
+                  <use href={`${sprite}#rating`} />
                 </svg>
                 <p>Rating: {rating}</p>
               </li>
@@ -148,7 +148,7 @@ const TeachersItem = ({ teacher }) => {
                       <Text>{reviewer_name}</Text>
                       <div>
                         <svg>
-                          <use href={`${sprite}#rating`}></use>
+                          <use href={`${sprite}#rating`} />
                         </svg>
                         <p>{reviewer_rating}.0</p>
                       </div>

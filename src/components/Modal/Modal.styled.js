@@ -26,6 +26,10 @@ export const ModalStyled = styled.div`
 `;
 
 export const CloseIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;

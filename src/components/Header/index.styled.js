@@ -11,12 +11,21 @@ export const HeaderContainer = styled(Container)`
   align-items: center;
 `;
 
-export const BtnWrapper = styled.div`
+export const ContentWrapper = styled.div`
   display: none;
 
   @media screen and (min-width: 768px) {
-    display: flex;
-    align-items: center;
+    display: block;
+  }
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
     gap: 1rem;
   }
 `;
@@ -28,6 +37,8 @@ export const Btn = styled.button`
 
   border: 1px solid transparent;
   border-radius: 0.75rem;
+
+  padding: 0;
 
   transition: var(--transition);
 `;
@@ -56,4 +67,21 @@ export const BtnRegistration = styled(Btn)`
 export const Img = styled.img`
   width: 20px;
   height: 20px;
+`;
+
+export const BurgerIcon = styled.div`
+  display: block;
+  width: 32px;
+  height: 32px;
+
+  cursor: pointer;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;

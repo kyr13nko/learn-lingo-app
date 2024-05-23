@@ -4,7 +4,11 @@
 
 The Learn Lingo app is designed for users to find a teacher to improve their knowledge of foreign languages. Here you can use filtering to find a teacher according to your requirements, add him to your favorites, and also order a trial lesson.
 
-[Repository on GitHub](https://github.com/kyr13nko/learn-lingo-app) | [Live page on Vercel](https://learn-lingo-app.vercel.app/)
+[Repository on GitHub](https://github.com/kyr13nko/learn-lingo-app) | [Live page on Vercel](https://learn-lingo-app.vercel.app/) | [Design on Figma](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/Learn-Lingo)
+
+## Technologies Used
+
+`HTML5/CSS3` `JavaScript` `React` `Vite` `React Toolkit` `React Router` `Firebase` `Axios` `Formik & Yup` `Responsive design` `Styled components`
 
 ## Pages
 
@@ -27,14 +31,6 @@ The Learn Lingo app is designed for users to find a teacher to improve their kno
 
   <!-- ![Main page screenshot](/public/favorites+select.png) -->
   <img src="/public/favorites+select.png" alt="Favorites page screenshot" width="800">
-
-## Technologies Used
-
-`HTML5/CSS3` `JavaScript` `React` `Vite` `React Toolkit` `React Router` `Firebase` `Axios` `Formik & Yup` `Responsive design` `Styled components`
-
-## Website layout
-
-The design of the application can be viewed on ["Figma"](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/Learn-Lingo)
 
 ## Contributor
 

@@ -78,6 +78,7 @@ export const Button = styled.button`
   line-height: 1.56;
 
   background-color: var(--color-primary);
+  color: var(--color-text);
 
   border: none;
   border-radius: 0.75rem;

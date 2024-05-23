@@ -2,7 +2,7 @@
 
 ## Description
 
-The Learn Lingo app is designed for users to find a teacher to improve their knowledge of foreign languages. Here you can use filtering to find a teacher according to your requirements, add him to your favorites, and also order a trial lesson.
+The Learn Lingo app is created for users to find a teacher to improve their knowledge of foreign languages. Here you can use filtering to find a teacher according to your requirements, add him to your favorites, and also order a trial lesson.
 
 [Repository on GitHub](https://github.com/kyr13nko/learn-lingo-app) | [Live page on Vercel](https://learn-lingo-app.vercel.app/) | [Design on Figma](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/Learn-Lingo)
 

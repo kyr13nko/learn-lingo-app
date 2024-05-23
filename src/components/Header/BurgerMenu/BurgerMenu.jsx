@@ -29,7 +29,7 @@ const BurgerMenu = ({ isOpen, onClose }) => {
           </svg>
         </CloseIcon>
         <Navigation onClose={onClose} />
-        <AppBar value="burger" />
+        <AppBar value="burger" onClose={onClose} />
       </BurgerContainer>
     </>
   );

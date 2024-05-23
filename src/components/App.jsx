@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 
 import Layout from "./Layout/Layout";
+import Loader from "./Loader/Loader";
 import { refreshUser } from "../store/auth/authOperations";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
@@ -22,7 +23,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing data...</b>
+    <Loader />
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>

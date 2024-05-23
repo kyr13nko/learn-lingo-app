@@ -23,10 +23,10 @@ export const BtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    gap: 1rem;
   }
 `;
 

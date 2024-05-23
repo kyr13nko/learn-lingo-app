@@ -99,12 +99,12 @@ export const Container = styled.div`
   }
 
   @media screen and (min-width: 1200px) {
-    padding: 0 2rem;
+    padding: 0 5rem;
   }
 
   @media screen and (min-width: 1440px) {
     max-width: 1440px;
-    padding: 0 3rem;
+    padding: 0 8rem;
   }
 `;
 

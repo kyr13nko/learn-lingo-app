@@ -12,7 +12,7 @@ import RegistrationForm from "../../Forms/RegistrationForm/RegistrationForm";
 import logInIcon from "../../../assets/images/log-in.svg";
 import { BtnLog, BtnRegistration, BtnWrapper, Img } from "../index.styled";
 
-const AuthNav = () => {
+const AuthNav = ({ onClose }) => {
   const dispatch = useDispatch();
   const { error } = useAuth();
 
@@ -22,8 +22,13 @@ const AuthNav = () => {
   const toggleLogInModal = () => {
     setShowLogInModal((prev) => !prev);
     if (error) dispatch(resetError());
+    onClose();
   };
-  const toggleRegistrationModal = () => setShowRegistrationModal((prev) => !prev);
+
+  const toggleRegistrationModal = () => {
+    setShowRegistrationModal((prev) => !prev);
+    onClose();
+  };
 
   return (
     <>

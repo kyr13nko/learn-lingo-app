@@ -6,11 +6,11 @@ The Learn Lingo app is designed for users to find a teacher to improve their kno
 
 [Repository on GitHub](https://github.com/kyr13nko/learn-lingo-app) | [Live page on Vercel](https://learn-lingo-app.vercel.app/) | [Design on Figma](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/Learn-Lingo)
 
-## Technologies Used
+## Technologies
 
 `HTML5/CSS3` `JavaScript` `React` `Vite` `React Toolkit` `React Router` `Firebase` `Axios` `Formik & Yup` `Responsive design` `Styled components`
 
-## Pages
+## Structure
 
 **_Home Page:_** The main page contains the company's logo and slogan, as well as its statistics. At the top of the page is the site navigation menu.
 

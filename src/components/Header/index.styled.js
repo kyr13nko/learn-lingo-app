@@ -35,6 +35,8 @@ export const Btn = styled.button`
   font-size: 1rem;
   line-height: 1.25;
 
+  color: var(--color-text);
+
   border: 1px solid transparent;
   border-radius: 0.75rem;
 
